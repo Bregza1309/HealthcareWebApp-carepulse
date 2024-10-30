@@ -59,7 +59,7 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
             placeholder={placeholder}
             international
             withCountryCallingCode
-            value={field.value as E164Number | string}
+            value={field.value as any | string}
             className="input-phone"
           />
         </FormControl>
