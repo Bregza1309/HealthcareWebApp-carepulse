@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-async-client-component */
-'use client';
 import { DataTable } from '@/components/table/DataTable';
 import StatCard from '@/components/StatCard';
 import { getRecentAppointmentList } from '@/lib/actions/appointment.actions';
