@@ -9,14 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  
 } from '@/components/ui/alert-dialog';
-import {
-  InputOTP,
-  InputOTPGroup,
-  
-  InputOTPSlot,
-} from '@/components/ui/input-otp';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 
 import { usePathname, useRouter } from 'next/navigation';
 import { decryptKey, encryptKey } from '@/lib/utils';
@@ -28,19 +22,19 @@ const PasskeyModal = () => {
   const [passkey, setPasskey] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const encryptedKey = typeof window !== undefined ? localStorage.getItem('accessKey'):null;
+  const encryptedKey = typeof window !== undefined ? localStorage.getItem('accessKey') : null;
 
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
-    if(path){
-      if ( accessKey=== process.env.NEXT_PUBLIC_ADMIN_PASSKEY! as string) {
-          setOpen(false);
-          router.push("/admin");
+    if (path) {
+      if (accessKey === (process.env.NEXT_PUBLIC_ADMIN_PASSKEY! as string)) {
+        setOpen(false);
+        router.push('/admin');
       } else {
         setOpen(true);
       }
     }
-  },[encryptedKey]);
+  }, [encryptedKey, path, router]);
   const closeModal = () => {
     setOpen(false);
     router.push('/');
@@ -48,9 +42,9 @@ const PasskeyModal = () => {
   const validatePasskey = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     //console.log(process.env.NEXT_PUBLIC_ADMIN_PASSKEY);
-    if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY! as string) {
-      const encryptedKey  = encryptKey(passkey);
-      localStorage.setItem('accessKey',encryptedKey);
+    if (passkey === (process.env.NEXT_PUBLIC_ADMIN_PASSKEY! as string)) {
+      const encryptedKey = encryptKey(passkey);
+      localStorage.setItem('accessKey', encryptedKey);
     } else {
       setError('Invalid passkey .Please try again');
     }

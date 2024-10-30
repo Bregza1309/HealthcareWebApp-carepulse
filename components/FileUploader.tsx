@@ -14,7 +14,7 @@ const FileUploader = ({ files, onChange }: FileUploaderTypes) => {
     // Do something with the files
     onChange(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <div {...getRootProps()} className="file-upload">
